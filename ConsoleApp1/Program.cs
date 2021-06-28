@@ -5,9 +5,16 @@ namespace ConsoleApp1
 {
     interface ITrade
     {
-        double value { get; }
-        string ClientSector { get; }
-        DateTime NextPaymentDate { get; }
+        double value { get; set;  }
+        string ClientSector { get; set;  }
+        DateTime NextPaymentDate { get; set;  }
+    }
+
+    class Trade : ITrade
+    {
+        double ITrade.value { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        string ITrade.ClientSector { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        DateTime ITrade.NextPaymentDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 
 
