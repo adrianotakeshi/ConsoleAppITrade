@@ -3,12 +3,62 @@ using System.Globalization;
 
 namespace ConsoleApp1
 {
+
+    // QUESTION 1
+
     interface ITrade
     {
-        double value { get; }
-        string ClientSector { get; }
-        DateTime NextPaymentDate { get; }
+        double value { get; set; }
+        string ClientSector { get; set; }
+        DateTime NextPaymentDate { get; set; }
+
+        string retornaCategoria(DateTime dataref);
     }
+
+    public class Trade : ITrade
+    {
+        public double value { get; set; }
+        public string ClientSector { get; set; }
+        public DateTime NextPaymentDate { get; set; }
+
+        public Trade(double valor, string setor, DateTime data)
+        {
+            this.value = valor;
+            this.ClientSector = setor;
+            this.NextPaymentDate = data;
+        }
+
+        public string retornaCategoria(DateTime dataref)
+        {
+            DateTime datalimite = this.NextPaymentDate.AddDays(30);
+
+            if (datalimite < dataref)
+            {
+                return "EXPIRED";
+            }
+            else
+            {
+                if (value > 1000000 && ClientSector.ToUpper() == "PUBLIC")
+                {
+                    return "MEDIUMRISK";
+                }
+                else
+                {
+                    if (value > 1000000 && ClientSector.ToUpper() == "PRIVATE")
+                    {
+                        return "HIGHRISK";
+                    }
+                    else
+                    {
+                        return "OTHER";
+                    }
+                }
+            }
+        }
+    }
+
+
+
 
     class Program
     {
@@ -19,11 +69,11 @@ namespace ConsoleApp1
             int n, cont = 0;
             string linhapar;
             string[] par;
-            DateTime data1, data2, datalimite;
+            DateTime data1, data2;
             Console.WriteLine("INPUT\n");
             data1 = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
             n = Int32.Parse(Console.ReadLine());
-            string[] tipo = new string[n];
+            string[] categoria = new string[n];
             while (cont < n)
             {
                 linhapar = Console.ReadLine();
@@ -31,25 +81,8 @@ namespace ConsoleApp1
                 valor = Int32.Parse(par[0]);
                 setor = par[1];
                 data2 = DateTime.ParseExact(par[2], "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                datalimite = data2.AddDays(30);
-                if (datalimite < data1)
-                {
-                    tipo[cont] = "EXPIRED";
-                }
-                else
-                {
-                    if (valor > 1000000 && setor.ToUpper() == "PUBLIC")
-                    {
-                        tipo[cont] = "MEDIUMRISK";
-                    }
-                    else
-                    {
-                        if (valor > 1000000 && setor.ToUpper() == "PRIVATE")
-                        {
-                            tipo[cont] = "HIGHRISK";
-                        }
-                    }
-                }
+                Trade trade = new Trade(valor, setor, data2);                
+                categoria[cont] = trade.retornaCategoria(data1);
                 cont++;
             }
 
@@ -57,9 +90,15 @@ namespace ConsoleApp1
             Console.WriteLine("\nOUTPUT\n");
             while (cont < n)
             {
-                Console.WriteLine(tipo[cont]);
+                Console.WriteLine(categoria[cont]);
                 cont++;
             }
         }
     }
+
+    // QUESTION 2
+
+    /* IF PEP CATEGORY IS INCLUDED, THE BOOLEAN PROPERTY WILL BE ADDED.
+       IF IT IS SET AS TRUE THE PEP CATEGORY WILL BE ASSIGNED TO THE CUSTOMER.
+       OTHERWISE IT WILL BE VERIFIED IF IT IS HIGH RISK, MEDIUM RISK OR EXPIRED. */
 }
