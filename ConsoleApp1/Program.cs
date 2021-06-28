@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using System.Globalization;
 
 namespace ConsoleApp1
 {
     interface ITrade
     {
-        double value { get; }
-        string ClientSector { get; }
-        DateTime NextPaymentDate { get; }
+        double value { get; set;  }
+        string ClientSector { get; set; }
+        DateTime NextPaymentDate { get; set; }
     }
 
     class Program
@@ -20,8 +20,10 @@ namespace ConsoleApp1
             string linhapar;
             string[] par;
             DateTime data1, data2, datalimite;
+            Console.WriteLine("INPUT\n");
             data1 = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
             n = Int32.Parse(Console.ReadLine());
+            string[] tipo = new string[n];
             while (cont < n)
             {
                 linhapar = Console.ReadLine();
@@ -29,26 +31,34 @@ namespace ConsoleApp1
                 valor = Int32.Parse(par[0]);
                 setor = par[1];
                 data2 = DateTime.ParseExact(par[2], "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                cont++;
                 datalimite = data2.AddDays(30);
                 if (datalimite < data1)
                 {
-                    Console.WriteLine("EXPIRED");
+                    tipo[cont] = "EXPIRED";
                 }
                 else
                 {
                     if (valor > 1000000 && setor.ToUpper() == "PUBLIC")
                     {
-                        Console.WriteLine("MEDIUMRISK");
+                        tipo[cont] = "MEDIUMRISK";
                     }
                     else
                     {
                         if (valor > 1000000 && setor.ToUpper() == "PRIVATE")
                         {
-                            Console.WriteLine("HIGHRISK");
+                            tipo[cont] = "HIGHRISK";
                         }
                     }
                 }
+                cont++;
+            }
+
+            cont = 0;
+            Console.WriteLine("\nOUTPUT\n");
+            while (cont < n)
+            {
+                Console.WriteLine(tipo[cont]);
+                cont++;
             }
         }
     }
