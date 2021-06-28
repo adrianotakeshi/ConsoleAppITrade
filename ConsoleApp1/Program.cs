@@ -99,6 +99,6 @@ namespace ConsoleApp1
     // QUESTION 2
 
     /* If the PEP category is included, a boolean property IsPoliticallyExposed will be added in the ITrade interface.
-     * If it is set as True, the method retornaCategoria will return "PEP" and in the program the customer category will be displayed as PEP. 
+     * If it is set as True, the method retornaCategoria will return "PEP" and in the program the customer category will be displayed as "PEP". 
      * If set to False, the value, sector and Next Payment Date will be checked to categorize the customer. */
 }
