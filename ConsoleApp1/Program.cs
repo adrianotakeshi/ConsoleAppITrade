@@ -98,7 +98,7 @@ namespace ConsoleApp1
 
     // QUESTION 2
 
-    /* IF PEP CATEGORY IS INCLUDED, THE BOOLEAN PROPERTY WILL BE ADDED.
-       IF IT IS SET AS TRUE THE PEP CATEGORY WILL BE ASSIGNED TO THE CUSTOMER.
-       OTHERWISE IT WILL BE VERIFIED IF IT IS HIGH RISK, MEDIUM RISK OR EXPIRED. */
+    /* If the PEP category is included, a boolean property IsPoliticallyExposed will be added in the ITrade interface.
+     * If it is set as True, the method retornaCategoria will return "PEP" and in the program the customer category will be displayed as PEP. 
+     * If set to False, the amount, sector and payment date will be checked to categorize the customer. */
 }
