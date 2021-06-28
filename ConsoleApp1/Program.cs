@@ -5,9 +5,9 @@ namespace ConsoleApp1
 {
     interface ITrade
     {
-        double value { get; set;  }
-        string ClientSector { get; set;  }
-        DateTime NextPaymentDate { get; set;  }
+        double value { get; }
+        string ClientSector { get; }
+        DateTime NextPaymentDate { get; }
     }
 
     class Program
