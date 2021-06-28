@@ -10,14 +10,6 @@ namespace ConsoleApp1
         DateTime NextPaymentDate { get; set;  }
     }
 
-    class Trade : ITrade
-    {
-        double ITrade.value { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        string ITrade.ClientSector { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        DateTime ITrade.NextPaymentDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    }
-
-
     class Program
     {
         static void Main(string[] args)
